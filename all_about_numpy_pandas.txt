@@ -1,0 +1,371 @@
+==> in pandas there are 2 forms :- 
+     1) series <==> list_form <==> 1-dimensional <==> single_column
+     2) dataFrame <==> 2-dimensional
+
+
+==> it is possible to iterate through the rows of an data_frame using "iterrows()"
+	## for(index,row) in df.iterrows():
+			print(row)
+
+
+
+==> formating a floating point number upto the required number of decimals :-
+============================================================================
+
+n = 22.34567
+need to 3 decimals
+print("%.3f" %n)
+
+OR
+
+round(n,3)  --> round of to 3 digits.
+
+
+
+
+JUPITER-NOTE BOOK:-    works in online mode the code would run on the server.
+---------------------
+--> the cells are of 2 types [code,and text/marked]
+--> shift+enter => to run a cell.
+--> the text in text cell can be formated
+                 --> # heading => gives big heading
+                 --> ## some how small
+---> ne-5 => n*10power-5
+-->booleans are auto-matically converted into integers when u used along with arithematic expression.
+-->\ => escape character ,it helps in neglecting the next character after it.
+--> \,\n in the string are treated as 1 character in the string.
+--> ''.join(str1) is better than concatination --> ''+str1 
+--> f"something {num}" ==> formated_message = "the something {}"
+                           ffm = formated_message.format(num)
+--> another way to create dictionary ==> dictionary_name = dict(key=value,key= value)
+--> dictionary_name[key] --> used to acess the dictionary value,but raise error if it is not present in the
+       dictionary.
+-->dictionary_name.get(key) -->gives None if that key is not present 
+-->dictionary_name.get(key,default_value) -->gives default_value if that key is not present.
+-->%%time --> is uesd to calculate the time taken to execute the cell in Jupyter notebook.
+
+--> in the functions , make sure that all the optional arguments i.e the arguments with default
+       value,should be mentioned at last.
+--> to install module in jupyter-notebook 
+         ==> !pip install numpy --upgrade --quiet
+--> the numpy arrays elements can be acessed as numpy_array_name[index]
+--> to get dot product of 2 numpy arrays 
+             ==> let say n1,n2 be numpy arrays
+                       dot_product_result = numpy.dot(n1,n2)
+--> it can be done in another way 
+          ==> dot_product_result = (n1*n2)-->return an array .sum()
+
+--> numpy_array_name.shape() ==> gives the shape (row,col,width)
+--> a 3d numpy array is nothing but putting 2 numpy 2d arrays side by side.
+
+--> to get shape of an any nd array just start fro outer step then count number of elements
+       , then move one step inside then count the no_of_elements,them again move one step inside
+            then again find the no_of_elements and so on .....
+       ===> thus u get the shape.
+--> python primitive data types can hold wide range of values,
+    but the numpy limits like 'int64' some-thing it means it can hold at max 64 bits.
+
+       --> to check data type of the in numpy 
+             --> numpy_variable.dtype
+
+
+--> matrix multiplication in numpy
+======================================
+     --> let say there would be two matrixs m1,m2 them matrix multiplication 
+              import numpy as np
+          
+                  ==> Mm = np.matmul(m1,m2)
+                          [or]
+                  ==> Mm = m1 @ m2
+
+climate_data_from_file = np.genfromtxt('climate.txt',delimiter=',',skip_header=1) 
+          --> the genfromtxt() => gives an numpyarray .
+
+===> concatinating 2 numpy arrays :-
+let say [n1]4*3 and [n2]4*1  ---> no_of_rows should be comman  if concatinating paralell ,axis =1
+                                  no_of_cols should be common  if concatinating horizontal, axis =0
+==> res = np.concatenate((n1,n2),axis = 1)
+
+==> to reshape the array 
+        numpy_variable_array.reshape(10,20) 
+
+
+===> to write into the csv file using numpy function :-
+=========================================================
+
+np.savetxt('file_name',variable_holding_the_data_need_to_save,
+                  header ='hd1,hd2',
+                  fmt ='%.2f',
+                  comments = '')
+
+
+==> Arithimetic operations on numpy arrays:-
+=============================================
+
+let say n1,n2  are numpy arrays
+
+res = n1+n2 --> corresponding elements are added.(if both n1,n2 are of same dimensions. 
+        it is direct process)
+                                                
+       if - in place of + then same 
+res = n1*5 --> every element is multiplied by 5.
+        same for others inplace of * if %,/ 
+
+internally the process going is if the matrices are compatible i.e [n1]m*n ; [n2]n*m
+
+===========best example=======
+ar2 = np.array(
+    [2,3,5]
+)
+ar2.shape --> gives (3,)
+
+==> if the matrixes is compatible then it may possible:-
+         EX:-
+             import numpy as np
+	        		ar1 = np.array([
+   					 [10,20,30],
+   					 [40,50,60]
+				])
+			ar2 = np.array(
+    					[2,3,5]
+				)
+			ar2.shape --> gives (3,)
+
+
+			rr = ar1+ar2S
+                  output:-
+                 =========
+			array([[12, 23, 35],
+         			[42, 53, 65]])
+
+
+                   
+
+==> the numpy arrays also support comparison operators and returns a array of boolean 
+     it means the operator is  applied on every corresponding elements of the 2 arrays and return
+            array of boolean 
+--> booleans are automatically converted into 1 or 0, when used with arithimatic operators.
+             let say n1,n2 be two arrays 
+        ==> (n<=n2).sum()  --> it gives the count which satisfied the  condition.
+
+
+
+==>NUMPY ARRAY INDEXING:-
+--------------------------
+--> you can pass a single value or a comma separated index value to acess more than one element
+    and also you can acess a range of elements.
+
+     let us assue the numpy array 'N' be of 3d then indexing would be:-
+                  the index would be one/two's/three's
+                  EX:-N[1,2:,3] --> we can use single index value or slicing.
+
+--> some special matrices :-
+    =========================
+     np.zeroes/ones(shape_in_tuple/list)
+     np.eye(shape_as_an_arguments_separated_by ,)  ---> it gives the identity matrix
+     np.random.rand(shape)
+     np.random.randn(shape_as_an argument separated by ,) --> has mean of 0 and std of 1
+               
+     let say the numpy array 'n'
+     n.reshape(2,3,-1)  --> if u leave any one as -1 then numpy will automatically calculate
+                            it's value based the total elements and the rest of values in shape.
+
+     np.arange(starting_value,ending_value,step_size)
+     np.linspace(starting_value,ending_value,no_of_elemnts_you_want) --> eually spaced.
+     ---> in arange the ending_value is not included but in linspace it is included. 
+
+
+
+==> OS MODULE:-
+=================
+os.getcwd()  --> gives the path of the current working directory
+os.listdir('.')  -->relative path , 'absolute-path' -->gives the list of all files in that directory.
+        ==> it returns a list.
+os.makedirs('directory_name',exist_ok = True) --> exist_ok --> if it is False then it raise an error
+                                               if that file is already exist,if it True than it 
+                                               doesn't raise any error.
+
+
+===>PANDAS:-
+==============
+--> PANDAS give an 'object' data_type(a generic one) for an feature in case if the pandas is unable
+    to determine the data_type of that column (for all strings it is object)
+--> df = pd.read_csv('file_path')
+    ---> methods 
+         --------
+       df.info()   --> gives the brief information about the data set.
+       df.describe()  --> overview of the numerical colums i.e some statastical information
+                          --> the count it giving is the number of non empty cells in that column.
+       df.columns     --> gives list of column names.
+       df.shape  --> gives the no.of rows and cols
+       df[colum_name] -->gives the complete column values it seems that it is a array or list
+                         of values,but it is an 'series' type.
+                       <==>df.column_name
+       --> to retrieve an specific cell value in the column 
+             we use df[column_name][cell_number] 
+          short cut.  --> df.at[cell_number/nothing but row number,column_name]
+ 
+      --> inorder to retrieve the more than one column then u need to pass a list of column in 
+              indexing  i.e df[[col1,col2]]
+
+--> to make a copy of the data_frame 
+    dfc = df.copy()
+--> to retrieve a row completely then --> df.loc[row_number] --> it is also a 'series' type.
+--> when there is no value in the csv file then pandas insert 'nan' value into the data_frame.
+     --> it is different from 0 ,thats why when you check the type of nan value it gives --> float type.
+
+--> if there is continous 'nan' values in an column of an data frame then to know from which row the 'real_values' will start
+     then => df.column_name.first_valid_index()
+--> to get random number of rows i.e completely random -->df.sample(no_of_rows)
+--> df.colum_name.sum()
+
+--> getting the rows that meet the required condition
+   high_from_new_cases = dfc.new_cases > 1000
+   df_as_pr_cond = dfc[high_from_new_cases]
+   df_as_pr_cond
+
+--> to display more i.e maximum no of rows in output then.
+   from IPython.display import display
+   with pd.option_context( 'display.max_rows',100):
+        display(df)
+
+--> to put back a column into a data_frame --> df['column_name']=value_column
+
+--> to drop an column from data frame => df.drop(columns=['ratio'],inplace = True) 
+         --> the 'inplace' attribute if it is true then the original data_frame is modified.
+--> sorting the data_frame based on the column(s) .
+     df.sort_values(['new_cases','date'],ascending=[False,True]).head(10) 
+           --> it means sort column1 in descending order,and col2 in ascendng_order.
+--> modifying a cell based on the pre and next cell value to clear the outlier.
+	import math
+	dfc.at[172,'new_cases'] = math.ceil((dfc.at[171,'new_cases']+dfc.at[173,'new_cases'])/2)
+--> to drop more than one row from a data_frame
+       dmy = dfc.loc[165:190].drop(list(range(170,181)),inplace=True)
+
+--> changing into a 'datetime' => df['date'] = pandas.to_datetime(df.date)
+
+--> dfc['year'] = p.DatetimeIndex(dfc.date).year/month/day/weekday
+
+--> groupby method:-
+     ================
+          grpmethod = df.groupby(on_which_feature_df_shoud_be_grouped)--> it is an intermediate
+                               data_frame u can perform aggregate functions on it like:-sum(),mean(),count()
+--> another form of method used for aggregation is --> cumsum => cumulative_sum.
+
+--> MERGE:-   to merge data_frames at least they should have one common column.
+============
+merged_df = df1.merge(df2,on='common_column_name')
+
+
+--> benifits of pandas over the sql is we can't combine the sal data_table with an csv file .
+    -- > but in pandas we can combine a data_frame from json and a data_frame from csv.
+
+-->data_frame_series.unique()  --> gives the unique values.
+--> drawing graphs using plot() :-
+===================================
+==> setting desired index to the data_frame --> df.set_index('desired_col_as_index')
+data_frame_series.plot() 
+
+
+
+==> VISUALISATION WITH MATPLOTLIB AND SEABORN :-
+=================================================
+--> seaborn is build on top of matplotlib.
+--> the => %matplotlib inline <=> tells to u r jupyter not to show u r outputs as pop-ups 
+     show it in below the code.
+    --> import matplotlib.pyplot as plt
+         # plt.plot(data_frame_series); --> the semi-colan removes showing up of unwanted output function calls.
+
+
+
+==>Styling Lines and Markers
+The plt.plot function supports many arguments for styling lines and markers:
+
+color or c: Set the color of the line (supported colors)
+linestyle or ls: Choose between a solid or dashed line
+linewidth or lw: Set the width of a line
+markersize or ms: Set the size of markers
+markeredgecolor or mec: Set the edge color for markers
+markeredgewidth or mew: Set the edge width for markers
+markerfacecolor or mfc: Set the fill color for markers
+alpha: Opacity of the plot
+
+-->fmt = '[marker_shape][line][color]'
+
+--> to change the window size of the plot.
+==> plt.figure(figsize = (8,4))
+--> import matplotlib as m
+     m.rcParams 
+       ---> it gives the list of parameters and their default values u can also change
+             u r wish.
+
+
+==> import seaborn as sb
+df = sb.load_dataset('data_setpath')
+sb.scatterplot(df.colm_name_for_x,similar_for_y)
+                     # hue = parameter used for segregation.
+       ## another way
+df = pd.read_csv('csv_file_path')
+
+sb.scatterplot('col_for_x','col_for_y',...,data=df)
+
+===>discription on what the various graphs tells about:-
+==========================================================
+ >> line_chart shows the overview of the situation.
+ >> bar graph enables to compare one instance with other.
+ >> histogram oka field gurinchi and in that too oka field lo oka range lo enni vunnai anna 
+    dani gurinchi.
+ 
+
+===> pil ==> python imaging library.
+
+
+
+
+
+
+
+
+             
+about urllib module:-
+=======================
+
+import urllib.request as u
+
+varble = u.urlopen('https://www.google.com')    -->makes an request to that specified website.
+
+print(varble.read())  --> prints the data it read.
+
+---> to download:-
+===================
+climate_data = u.urlretrieve('https://gist.github.com/BirajCoder/a4ffcb76fd6fb221d76ac2ee2b8584e9/raw/4054f90adfd361b7aa4255e99c2e874664094cea/climate.csv', 
+    'climate.txt')
+
+==> in python files the binary_mode [b] is used when we working with non-text files like
+            images etc
+==> need of closing the file --> when u open a file it will be placed on the ram if u not 
+close the file it will eatup u r ram.
+==> str.strip() --> strip() is used to remove the spaces at begining ,ending and new line character.
+
+==> file_obj.readlines()  --> it returns the file contents (line by line) into a list as elements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
